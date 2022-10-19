@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import data from './data';
 import './App.css';
 import styled from 'styled-components';
@@ -17,10 +17,29 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [tasks, setTasks] = useState(data);
 
+  const checkIsCompleted = () => {
+    const taskDone = tasks.filter(({ completed }) => completed);
+    const notTaskDone = tasks.filter(({ completed }) => !completed);
+    setTasks([...notTaskDone, ...taskDone]);
+  };
+
+  useEffect(() => {
+    checkIsCompleted();
+  }, []);
+
+  const handleChecked = (index, completed) => () => {
+    setTasks((prevState) => {
+      const copyState = [...prevState];
+      copyState[index].completed = !completed;
+      checkIsCompleted();
+      return copyState;
+    });
+  };
+
   return (
     <Container>
       <NewTask />
-      <TasksList data={tasks} />
+      <TasksList data={tasks} handleChecked={handleChecked} />
     </Container>
   );
 }

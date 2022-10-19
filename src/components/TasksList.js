@@ -12,9 +12,13 @@ const Task = styled.div`
   display: flex;
   gap: 15px;
   align-items: center;
-  background: #22232f;
+  /* background: #22232f; */
+  background: ${({ test }) => (test ? '#2c2d30' : '#22232f')};
   border-radius: 8px;
   padding: 10px;
+  /* #2c2d30 */
+  text-decoration-line: ${({ test }) => test && 'line-through'};
+  transition: 0.5s;
 `;
 
 const ContainerTasksList = styled.div`
@@ -39,7 +43,7 @@ const WrapperTitle = styled.div`
 `;
 
 // eslint-disable-next-line react/prop-types
-const TasksList = ({ data }) => {
+const TasksList = ({ data, handleChecked }) => {
   if (!data.length) {
     return 'Your TaskList is empty';
   }
@@ -51,9 +55,13 @@ const TasksList = ({ data }) => {
         <span>You have {data.length} tasks</span>
       </WrapperTitle>
       <Tasks>
-        {data.map(({ id, title, completed }) => (
-          <Task key={id}>
-            <InputCheckbox type="checkbox" defaultChecked={completed} />
+        {data.map(({ id, title, completed }, index) => (
+          <Task test={completed} key={id}>
+            <InputCheckbox
+              type="checkbox"
+              defaultChecked={completed}
+              onClick={handleChecked(index, completed)}
+            />
             <p>{title}</p>
           </Task>
         ))}
