@@ -54,12 +54,12 @@ const IconPlus = styled(AiOutlinePlus)`
 `;
 
 // eslint-disable-next-line react/prop-types
-const NewTask = () => {
+const NewTask = ({ handleSubmit, error }) => {
   // eslint-disable-next-line react/prop-types
   return (
     <ContainerNewTask>
       <h1>Add a new task</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <GroupForm>
           <Label htmlFor="title">Title</Label>
           <Input
@@ -68,6 +68,7 @@ const NewTask = () => {
             name="title"
             id="title"
           />
+          {error && 'title is required'}
         </GroupForm>
         <GroupForm>
           <Label htmlFor="description">Description</Label>
