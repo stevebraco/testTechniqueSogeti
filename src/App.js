@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-import Tasks from './pages/Tasks';
+import TasksPage from './pages/TasksPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import DetailsTask from './pages/DetailsTask';
+import DetailsTaskPage from './pages/DetailsTaskPage';
 import data from './data';
 
 function App() {
@@ -11,8 +11,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Tasks tasks={tasks} setTasks={setTasks} />} />
-        <Route path="/:id" element={<DetailsTask data={tasks} />} />
+        <Route
+          path="/"
+          element={<TasksPage tasks={tasks} setTasks={setTasks} />}
+        />
+        <Route path="/:id" element={<DetailsTaskPage data={tasks} />} />
       </Routes>
     </BrowserRouter>
   );

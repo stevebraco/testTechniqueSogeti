@@ -9,6 +9,8 @@ body {
   background: #171820;
   color: white;
   font-family: 'Poppins', sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 a {
