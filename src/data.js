@@ -9,11 +9,17 @@ const data = [
     id: 2,
     title: "Check les tests unitaires et d'intégration ",
     description: 'Je suis une description',
-    completed: false,
+    completed: true,
   },
   {
     id: 3,
     title: 'Parler au client du projet',
+    description: 'Je suis une description',
+    completed: false,
+  },
+  {
+    id: 4,
+    title: 'Voir le scrum master',
     description: 'Je suis une description',
     completed: false,
   },

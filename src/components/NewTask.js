@@ -48,7 +48,14 @@ const ButtonSubmit = styled.button`
   cursor: pointer;
 `;
 
+const IconPlus = styled(AiOutlinePlus)`
+  font-weight: bolder;
+  margin-right: 3px;
+`;
+
+// eslint-disable-next-line react/prop-types
 const NewTask = () => {
+  // eslint-disable-next-line react/prop-types
   return (
     <ContainerNewTask>
       <h1>Add a new task</h1>
@@ -73,7 +80,7 @@ const NewTask = () => {
           ></TextArea>
         </GroupForm>
         <ButtonSubmit>
-          <AiOutlinePlus />
+          <IconPlus />
           Add New Task
         </ButtonSubmit>
       </form>

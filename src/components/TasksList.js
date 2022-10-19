@@ -3,14 +3,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Tasks = styled.div`
-  /* background: blue; */
   display: flex;
   flex-direction: column;
   gap: 25px;
 `;
 
 const Task = styled.div`
-  /* background: red; */
   display: flex;
   gap: 15px;
   align-items: center;
@@ -40,6 +38,7 @@ const WrapperTitle = styled.div`
   }
 `;
 
+// eslint-disable-next-line react/prop-types
 const TasksList = ({ data }) => {
   if (!data.length) {
     return 'Your TaskList is empty';
@@ -52,9 +51,9 @@ const TasksList = ({ data }) => {
         <span>You have {data.length} tasks</span>
       </WrapperTitle>
       <Tasks>
-        {data.map(({ id, title }) => (
+        {data.map(({ id, title, completed }) => (
           <Task key={id}>
-            <InputCheckbox type="checkbox" />
+            <InputCheckbox type="checkbox" defaultChecked={completed} />
             <p>{title}</p>
           </Task>
         ))}
