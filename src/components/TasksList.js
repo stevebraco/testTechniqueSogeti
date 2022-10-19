@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const Tasks = styled.div`
   display: flex;
@@ -56,13 +57,15 @@ const TasksList = ({ data, handleChecked }) => {
       </WrapperTitle>
       <Tasks>
         {data.map(({ id, title, completed }, index) => (
-          <Task test={completed} key={id}>
+          <Task key={id} test={completed}>
             <InputCheckbox
               type="checkbox"
               defaultChecked={completed}
               onClick={handleChecked(index, completed)}
             />
-            <p>{title}</p>
+            <Link to={`/${id}`}>
+              <p>{title}</p>
+            </Link>
           </Task>
         ))}
       </Tasks>
