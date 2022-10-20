@@ -7,6 +7,7 @@ export const ContainerStyles = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 0 5px;
 `;
 
 export const DetailStyles = styled.div`

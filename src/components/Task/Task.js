@@ -1,19 +1,27 @@
 import React from 'react';
-import { InputCheckboxStyles, TaskStyles, TitleStyles } from './TaskStyles';
+import {
+  ButtonDeleteStyles,
+  InputCheckboxStyles,
+  TaskStyles,
+  TitleStyles,
+} from './TaskStyles';
 import { Link } from 'react-router-dom';
 
-const Task = ({ id, title, completed, index, handleChecked }) => {
+const Task = ({ id, title, completed, index, handleChecked, handleDelete }) => {
   return (
     <TaskStyles completed={completed} data-testid="task">
-      <InputCheckboxStyles
-        data-testid="checkbox-element"
-        type="checkbox"
-        defaultChecked={completed}
-        onClick={handleChecked(index, completed)}
-      />
-      <Link to={`/${id}`}>
-        <TitleStyles>{title}</TitleStyles>
-      </Link>
+      <div>
+        <InputCheckboxStyles
+          data-testid="checkbox-element"
+          type="checkbox"
+          defaultChecked={completed}
+          onClick={handleChecked(index, completed)}
+        />
+        <Link to={`/${id}`}>
+          <TitleStyles completed={completed}>{title}</TitleStyles>
+        </Link>
+      </div>
+      <ButtonDeleteStyles onClick={handleDelete(id)}>X</ButtonDeleteStyles>
     </TaskStyles>
   );
 };

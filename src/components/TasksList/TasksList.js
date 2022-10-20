@@ -6,10 +6,11 @@ import {
   WrapperTitleStyles,
 } from './TasksListStyles';
 import Task from '../Task/Task';
+import EmptyTask from '../EmptyTask/EmptyTask';
 
-const TasksList = ({ data, handleChecked }) => {
+const TasksList = ({ data, handleChecked, handleDelete }) => {
   if (!data.length) {
-    return 'Your TaskList is empty';
+    return <EmptyTask />;
   }
 
   return (
@@ -25,6 +26,7 @@ const TasksList = ({ data, handleChecked }) => {
             {...item}
             index={index}
             handleChecked={handleChecked}
+            handleDelete={handleDelete}
           />
         ))}
       </TasksStyles>

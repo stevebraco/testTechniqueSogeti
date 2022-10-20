@@ -6,6 +6,7 @@ export const filterDataCompleted = (array) => {
 
 export const addTask = (list, item) => [item, ...list];
 
-export const findTaskId = (array, id) => {
-  return array.find((task) => task.id === +id);
-};
+export const findTaskId = (array, id) => array.find((task) => task.id === +id);
+
+export const deleteTask = (array, id) =>
+  array.filter((task) => task.id !== +id);

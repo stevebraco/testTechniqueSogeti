@@ -4,11 +4,13 @@ import '../App.css';
 import styled from 'styled-components';
 import NewTask from '../components/NewTask/NewTask';
 import TasksList from '../components/TasksList/TasksList';
-import { addTask, filterDataCompleted } from '../lib/helpers';
+import { addTask, deleteTask, filterDataCompleted } from '../lib/helpers';
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 400px 1fr;
+  /* grid-template-columns: 400px 1fr; */
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
   height: 100%;
 `;
 
@@ -56,10 +58,19 @@ function TasksPage({ tasks, setTasks }) {
     e.target.reset();
   };
 
+  const handleDelete = (id) => () => {
+    const taskDelete = deleteTask(tasks, id);
+    setTasks(taskDelete);
+  };
+
   return (
     <Container>
       <NewTask error={error} handleSubmit={handleSubmit} />
-      <TasksList data={tasks} handleChecked={handleChecked} />
+      <TasksList
+        data={tasks}
+        handleChecked={handleChecked}
+        handleDelete={handleDelete}
+      />
     </Container>
   );
 }
