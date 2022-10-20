@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route
           exact
-          path="/testTechniqueSogeti"
+          path="/"
           element={<TasksPage tasks={tasks} setTasks={setTasks} />}
         />
         <Route path="/:id" element={<DetailsTaskPage data={tasks} />} />

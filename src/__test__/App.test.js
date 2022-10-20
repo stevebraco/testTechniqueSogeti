@@ -17,7 +17,7 @@ describe('When I am on Task Page', () => {
       const task = screen.getAllByTestId('task');
       fireEvent.click(checkbox[0]);
 
-      expect(task[0].classList.contains('beJHPX')).toBe(true);
+      expect(task[0].classList.contains('gDdplp')).toBe(true);
     });
     it('Should be placed at the bottom of the list', () => {
       const result = filterDataCompleted(mockedTasks.fakeData());
