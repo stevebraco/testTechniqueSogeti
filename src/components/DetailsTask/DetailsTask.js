@@ -16,7 +16,7 @@ const DetailsTask = ({ title, description, completed }) => {
     <ContainerStyles>
       <DetailStyles>
         <WrapperBackStyles>
-          <GoBackStyles to="/testTechniqueSogeti">
+          <GoBackStyles to="/">
             <IconArrowLeft />
             Go Back
           </GoBackStyles>
