@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/testTechniqueSogeti/static/css/main.a1075b0d.css",
-    "main.js": "/testTechniqueSogeti/static/js/main.31a60eb9.js",
-    "index.html": "/testTechniqueSogeti/index.html",
-    "main.a1075b0d.css.map": "/testTechniqueSogeti/static/css/main.a1075b0d.css.map",
-    "main.31a60eb9.js.map": "/testTechniqueSogeti/static/js/main.31a60eb9.js.map"
+    "main.css": "/static/css/main.a1075b0d.css",
+    "main.js": "/static/js/main.03c413fe.js",
+    "index.html": "/index.html",
+    "main.a1075b0d.css.map": "/static/css/main.a1075b0d.css.map",
+    "main.03c413fe.js.map": "/static/js/main.03c413fe.js.map"
   },
   "entrypoints": [
     "static/css/main.a1075b0d.css",
-    "static/js/main.31a60eb9.js"
+    "static/js/main.03c413fe.js"
   ]
 }
