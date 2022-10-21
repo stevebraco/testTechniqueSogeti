@@ -8,6 +8,7 @@ export const TasksStyles = styled.div`
 
 export const ContainerTasksListStyles = styled.div`
   padding: 20px;
+  flex: 50%;
 `;
 
 export const WrapperTitleStyles = styled.div`

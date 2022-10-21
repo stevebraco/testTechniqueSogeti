@@ -9,6 +9,7 @@ export const GroupFormStyles = styled.div`
 export const ContainerNewTaskStyles = styled.div`
   padding: 20px;
   border-right: 2px solid #22232f;
+  flex: 50%;
 `;
 
 export const LabelStyles = styled.label`

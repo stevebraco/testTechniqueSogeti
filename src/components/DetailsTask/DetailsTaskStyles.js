@@ -8,6 +8,7 @@ export const ContainerStyles = styled.div`
   justify-content: center;
   height: 100%;
   padding: 0 5px;
+  flex: 50%;
 `;
 
 export const DetailStyles = styled.div`

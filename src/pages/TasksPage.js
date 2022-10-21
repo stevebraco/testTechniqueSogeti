@@ -9,11 +9,11 @@ import { filterDataCompleted } from '../lib/helpers';
 import useForm from '../hook/useForm';
 
 const Container = styled.div`
-  display: grid;
-  /* grid-template-columns: 400px 1fr; */
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-
+  display: flex;
   height: 100%;
+  @media (max-width: 1045px) {
+    flex-direction: column;
+  }
 `;
 
 function TasksPage({ tasks, setTasks }) {
@@ -31,11 +31,7 @@ function TasksPage({ tasks, setTasks }) {
         handleSubmit={handleSubmit}
         updateTask={updateTask}
       />
-      <TasksList
-        data={tasks}
-        handleTask={handleTask}
-        // handleFilter={handleFilter}
-      />
+      <TasksList data={tasks} handleTask={handleTask} />
     </Container>
   );
 }

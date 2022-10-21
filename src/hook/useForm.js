@@ -14,9 +14,7 @@ export default function useForm(tasks, setTasks) {
     setTasks((prevState) => {
       const copyState = [...prevState];
       copyState[index].completed = !completed;
-      const dataFilterCompleted = filterDataCompleted(copyState);
-
-      return dataFilterCompleted;
+      return filterDataCompleted(copyState);
     });
   };
 
@@ -37,9 +35,7 @@ export default function useForm(tasks, setTasks) {
         completed: false,
       };
 
-      const updateTaskList = addTask(tasks, newTask);
-
-      setTasks(updateTaskList);
+      setTasks(addTask(tasks, newTask));
     } else {
       setTasks((prevState) => {
         let copyState = prevState;
@@ -59,8 +55,7 @@ export default function useForm(tasks, setTasks) {
   };
 
   const handleDelete = (id) => () => {
-    const taskDelete = deleteTask(tasks, id);
-    setTasks(taskDelete);
+    setTasks(deleteTask(tasks, id));
   };
 
   const handleUpdate = (task, index) => () => {
@@ -76,8 +71,8 @@ export default function useForm(tasks, setTasks) {
   };
 
   const checkIsCompleted = () => {
-    const dataFilterCompleted = filterDataCompleted(tasks);
-    setTasks(dataFilterCompleted);
+    // const dataFilterCompleted = filterDataCompleted(tasks);
+    setTasks(filterDataCompleted(tasks));
   };
 
   return {
