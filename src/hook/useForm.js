@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { addTask, deleteTask, filterDataCompleted } from '../lib/helpers';
 
 export default function useForm(tasks, setTasks) {
-  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(false);
   const [updateTask, setUpdateTask] = useState({
     isEdit: false,
@@ -33,6 +32,7 @@ export default function useForm(tasks, setTasks) {
         title: title.value,
         description: description.value,
         completed: false,
+        date: new Date().toISOString(),
       };
 
       setTasks(addTask(tasks, newTask));

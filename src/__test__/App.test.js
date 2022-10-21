@@ -11,7 +11,6 @@ import mockedTasks from '../__mocks__/mockData';
 describe('When I am on Task Page', () => {
   describe('When a todo is done', () => {
     it('Should be crossed out', async () => {
-      // eslint-disable-next-line react/react-in-jsx-scope
       render(<App />);
       const checkbox = screen.getAllByTestId('checkbox-element');
       const task = screen.getAllByTestId('task');

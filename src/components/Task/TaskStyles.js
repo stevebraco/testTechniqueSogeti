@@ -13,7 +13,7 @@ export const TaskStyles = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  align-items: center;
+  align-items: baseline;
   background: ${({ completed }) => (completed ? '#2c2d30' : '#22232f')};
   border-radius: 8px;
   padding: 10px 25px 10px;
@@ -25,7 +25,7 @@ export const TitleStyles = styled.h2`
   font-weight: 500;
   text-decoration-line: ${({ completed }) => completed && 'line-through'};
   display: inline-block;
-  @media (max-width: 375px) {
+  @media (max-width: 500px) {
     font-size: 10px;
   }
 `;

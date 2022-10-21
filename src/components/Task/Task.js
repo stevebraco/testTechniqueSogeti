@@ -8,10 +8,12 @@ import {
 } from './TaskStyles';
 import { Link } from 'react-router-dom';
 import { BsFillPencilFill } from 'react-icons/bs';
+import Date from '../Date/Date';
 
 const Task = ({ task, index, handleTask }) => {
   const { handleChecked, handleDelete, handleUpdate } = handleTask();
-  const { id, title, completed } = task;
+  const { id, title, completed, date } = task;
+
   return (
     <TaskStyles completed={completed}>
       <div>
@@ -26,6 +28,7 @@ const Task = ({ task, index, handleTask }) => {
             {title}
           </TitleStyles>
         </Link>
+        <Date date={date} />
       </div>
       <div>
         <ButtonDeleteStyles onClick={handleDelete(id)}>X</ButtonDeleteStyles>

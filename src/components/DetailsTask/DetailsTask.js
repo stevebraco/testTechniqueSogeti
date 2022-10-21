@@ -1,4 +1,5 @@
 import React from 'react';
+import Date from '../Date/Date';
 import {
   ContainerStyles,
   DescriptionStyles,
@@ -10,7 +11,7 @@ import {
   WrapperBackStyles,
 } from './DetailsTaskStyles';
 
-const DetailsTask = ({ title, description, completed }) => {
+const DetailsTask = ({ title, description, completed, date }) => {
   console.log(completed);
   return (
     <ContainerStyles>
@@ -26,6 +27,7 @@ const DetailsTask = ({ title, description, completed }) => {
         </WrapperBackStyles>
         <TitleStyles>{title}</TitleStyles>
         <DescriptionStyles>{description}</DescriptionStyles>
+        <Date date={date} />
       </DetailStyles>
     </ContainerStyles>
   );
