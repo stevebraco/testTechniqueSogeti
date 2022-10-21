@@ -35,6 +35,7 @@ export const TextAreaStyles = styled.textarea`
   font-family: 'Poppins', sans-serif;
   resize: none;
   border-radius: 8px;
+  height: 100px;
 `;
 
 export const ButtonSubmitStyles = styled.button`

@@ -32,6 +32,16 @@ export const ButtonDeleteStyles = styled.button`
   background: #e74c3c52;
   color: #e74c3c;
   border-radius: 5px;
-  padding: 8px 10px;
+  padding: 4px 8px;
+  cursor: pointer;
+  margin-right: 10px;
+`;
+
+export const ButtonUpdateStyles = styled.button`
+  border: none;
+  color: #6fba76;
+  background: #6fba762e;
+  border-radius: 5px;
+  padding: 4px 6px;
   cursor: pointer;
 `;

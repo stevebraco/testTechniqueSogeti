@@ -10,3 +10,10 @@ export const findTaskId = (array, id) => array.find((task) => task.id === +id);
 
 export const deleteTask = (array, id) =>
   array.filter((task) => task.id !== +id);
+
+export const selectFilter = (task) => {
+  return {
+    All: task,
+    InProgress: !task.completed,
+  };
+};

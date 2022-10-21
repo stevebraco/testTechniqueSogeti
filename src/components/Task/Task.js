@@ -1,13 +1,17 @@
 import React from 'react';
 import {
   ButtonDeleteStyles,
+  ButtonUpdateStyles,
   InputCheckboxStyles,
   TaskStyles,
   TitleStyles,
 } from './TaskStyles';
 import { Link } from 'react-router-dom';
+import { BsFillPencilFill } from 'react-icons/bs';
 
-const Task = ({ id, title, completed, index, handleChecked, handleDelete }) => {
+const Task = ({ task, index, handleTask }) => {
+  const { handleChecked, handleDelete, handleUpdate } = handleTask();
+  const { id, title, completed } = task;
   return (
     <TaskStyles completed={completed}>
       <div>
@@ -17,13 +21,18 @@ const Task = ({ id, title, completed, index, handleChecked, handleDelete }) => {
           defaultChecked={completed}
           onClick={handleChecked(index, completed)}
         />
-        <Link to={`/${id}`}>
+        <Link to={`/testTechniqueSogeti/${id}`}>
           <TitleStyles data-testid="task" completed={completed}>
             {title}
           </TitleStyles>
         </Link>
       </div>
-      <ButtonDeleteStyles onClick={handleDelete(id)}>X</ButtonDeleteStyles>
+      <div>
+        <ButtonDeleteStyles onClick={handleDelete(id)}>X</ButtonDeleteStyles>
+        <ButtonUpdateStyles onClick={handleUpdate(task, index)}>
+          <BsFillPencilFill />
+        </ButtonUpdateStyles>
+      </div>
     </TaskStyles>
   );
 };

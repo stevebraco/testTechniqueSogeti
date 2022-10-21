@@ -5,27 +5,29 @@ import {
   ButtonSubmitStyles,
   ContainerNewTaskStyles,
   GroupFormStyles,
-  IconPlusStyles,
   InputStyles,
   LabelStyles,
   TextAreaStyles,
 } from './NewTaskStyles';
+import MessageError from '../MessageError/MessageError';
 
-const NewTask = ({ handleSubmit, error }) => {
+const NewTask = ({ handleSubmit, error, updateTask }) => {
+  const { isEdit, title, description } = updateTask;
+  const isDefaultValue = (value) => (isEdit ? value : '');
   return (
     <ContainerNewTaskStyles>
-      <h1>Add a new task</h1>
+      {!isEdit ? <h1>Add a new task</h1> : <h1>Update a task</h1>}
       <form data-testid="form" onSubmit={handleSubmit}>
         <GroupFormStyles>
-          <LabelStyles htmlFor="title">Title</LabelStyles>
+          <LabelStyles htmlFor="title">Title*</LabelStyles>
           <InputStyles
             type="text"
             placeholder="Add a title"
-            name="title"
             id="title"
             data-testid="title"
+            defaultValue={isDefaultValue(title)}
           />
-          {error && 'title is required'}
+          {error && <MessageError />}
         </GroupFormStyles>
         <GroupFormStyles>
           <LabelStyles htmlFor="description">Description</LabelStyles>
@@ -33,14 +35,10 @@ const NewTask = ({ handleSubmit, error }) => {
             name="description"
             placeholder="Add a description"
             id="description"
-            cols="10"
-            rows="5"
+            defaultValue={isDefaultValue(description)}
           ></TextAreaStyles>
         </GroupFormStyles>
-        <ButtonSubmitStyles data-testid="button">
-          <IconPlusStyles />
-          Add New Task
-        </ButtonSubmitStyles>
+        <ButtonSubmitStyles data-testid="button">Save</ButtonSubmitStyles>
       </form>
     </ContainerNewTaskStyles>
   );
