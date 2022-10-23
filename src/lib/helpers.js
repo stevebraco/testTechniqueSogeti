@@ -1,6 +1,9 @@
 export const filterDataCompleted = (array) => {
   const taskDone = array.filter(({ completed }) => completed);
-  const notTaskDone = array.filter(({ completed }) => !completed);
+  const notTaskDone = array
+    .filter(({ completed }) => !completed)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  console.log(notTaskDone);
   return [...notTaskDone, ...taskDone];
 };
 

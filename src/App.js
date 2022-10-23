@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
-import './App.css';
-import TasksPage from './pages/TasksPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import TasksPage from './pages/TasksPage';
 import DetailsTaskPage from './pages/DetailsTaskPage';
+
 import data from './data';
+import './App.css';
+import Test from './components/Test';
 
 function App() {
-  const [tasks, setTasks] = useState(data);
+  const [tasks, setTasks] = useState(
+    () => JSON.parse(localStorage.getItem('tasks')) ?? data
+  );
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route
+        {/* <Route
           exact
           path="/testTechniqueSogeti"
           element={<TasksPage tasks={tasks} setTasks={setTasks} />}
-        />
-        <Route
+        /> */}
+        <Route exact path="/testTechniqueSogeti" element={<TasksPage />} />
+        {/* <Route
           path="/testTechniqueSogeti/:id"
           element={<DetailsTaskPage data={tasks} />}
-        />
+        /> */}
+        <Route path="/testTechniqueSogeti/:id" element={<DetailsTaskPage />} />
+        <Route path="/testTechniqueSogeti/test" element={<Test />} />
       </Routes>
     </BrowserRouter>
   );

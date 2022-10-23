@@ -1,14 +1,19 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import DetailsTask from '../components/DetailsTask/DetailsTask';
+import { useTasksContext } from '../context/tasks_context';
 import { findTaskId } from '../lib/helpers';
 
-const DetailsTaskPage = ({ data }) => {
+const DetailsTaskPage = () => {
   const { id } = useParams();
+  const { fetchTask, task } = useTasksContext();
 
-  const findTask = findTaskId(data, id);
-  return <DetailsTask {...findTask} />;
+  useEffect(() => {
+    fetchTask(id);
+  }, [id]);
+
+  return <DetailsTask {...task} />;
 };
 
 export default DetailsTaskPage;

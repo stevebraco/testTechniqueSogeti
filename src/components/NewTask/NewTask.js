@@ -1,5 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { useTasksContext } from '../../context/tasks_context';
+
+import MessageError from '../MessageError/MessageError';
 
 import {
   ButtonSubmitStyles,
@@ -9,15 +11,21 @@ import {
   LabelStyles,
   TextAreaStyles,
 } from './NewTaskStyles';
-import MessageError from '../MessageError/MessageError';
 
-const NewTask = ({ handleSubmit, error, updateTask }) => {
-  const { isEdit, title, description } = updateTask;
-  const isDefaultValue = (value) => (isEdit ? value : '');
+const NewTask = () => {
+  const { editTask, handleSubmit, success, reset, isEdit } = useTasksContext();
+  const isDefaultValue = (value) => (editTask.title ? value : '');
+  const { title, description } = editTask;
+
+  useEffect(() => {
+    if (success) {
+      reset();
+    }
+  }, [success]);
   return (
     <ContainerNewTaskStyles>
-      {!isEdit ? <h1>Add a new task</h1> : <h1>Update a task</h1>}
-      <form data-testid="form" onSubmit={handleSubmit}>
+      {!editTask.title ? <h1>Add a new task</h1> : <h1>Update a task</h1>}
+      <form data-testid="form" onSubmit={handleSubmit(editTask)}>
         <GroupFormStyles>
           <LabelStyles htmlFor="title">Title*</LabelStyles>
           <InputStyles
@@ -27,7 +35,7 @@ const NewTask = ({ handleSubmit, error, updateTask }) => {
             data-testid="title"
             defaultValue={isDefaultValue(title)}
           />
-          {error && <MessageError />}
+          {/* {error && <MessageError />} */}
         </GroupFormStyles>
         <GroupFormStyles>
           <LabelStyles htmlFor="description">Description</LabelStyles>
@@ -45,8 +53,3 @@ const NewTask = ({ handleSubmit, error, updateTask }) => {
 };
 
 export default NewTask;
-
-NewTask.propTypes = {
-  handleSubmit: PropTypes.func,
-  error: PropTypes.bool,
-};

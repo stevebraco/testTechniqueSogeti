@@ -12,7 +12,6 @@ import {
 } from './DetailsTaskStyles';
 
 const DetailsTask = ({ title, description, completed, date }) => {
-  console.log(completed);
   return (
     <ContainerStyles>
       <DetailStyles>

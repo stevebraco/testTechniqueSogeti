@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   ButtonDeleteStyles,
   ButtonUpdateStyles,
@@ -9,10 +9,20 @@ import {
 import { Link } from 'react-router-dom';
 import { BsFillPencilFill } from 'react-icons/bs';
 import Date from '../Date/Date';
+import { useTasksContext } from '../../context/tasks_context';
 
-const Task = ({ task, index, handleTask }) => {
-  const { handleChecked, handleDelete, handleUpdate } = handleTask();
+const Task = ({ task, index }) => {
+  // const { handleChecked, handleDelete, handleUpdate } = handleTask();
   const { id, title, completed, date } = task;
+
+  const { handleDelete, success, reset, handleChecked, handleUpdate } =
+    useTasksContext();
+
+  useEffect(() => {
+    if (success) {
+      reset();
+    }
+  }, [success]);
 
   return (
     <TaskStyles completed={completed}>
@@ -21,7 +31,7 @@ const Task = ({ task, index, handleTask }) => {
           data-testid="checkbox-element"
           type="checkbox"
           defaultChecked={completed}
-          onClick={handleChecked(index, completed)}
+          onClick={handleChecked(task)}
         />
         <Link to={`/testTechniqueSogeti/${id}`}>
           <TitleStyles data-testid="task" completed={completed}>
@@ -32,7 +42,7 @@ const Task = ({ task, index, handleTask }) => {
       </div>
       <div>
         <ButtonDeleteStyles onClick={handleDelete(id)}>X</ButtonDeleteStyles>
-        <ButtonUpdateStyles onClick={handleUpdate(task, index)}>
+        <ButtonUpdateStyles data-testid="update" onClick={handleUpdate(task)}>
           <BsFillPencilFill />
         </ButtonUpdateStyles>
       </div>

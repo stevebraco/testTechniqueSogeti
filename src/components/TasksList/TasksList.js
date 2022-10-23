@@ -1,15 +1,16 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+
+import Task from '../Task/Task';
+import EmptyTask from '../EmptyTask/EmptyTask';
+import ButtonFilter from '../ButtonFilter/ButtonFilter';
+import { selectFilter } from '../../lib/helpers';
+
 import {
   ContainerTasksListStyles,
   TasksStyles,
   WrapperTitleStyles,
 } from './TasksListStyles';
-import Task from '../Task/Task';
-import EmptyTask from '../EmptyTask/EmptyTask';
-import ButtonFilter from '../ButtonFilter/ButtonFilter';
-import { selectFilter } from '../../lib/helpers';
+import { useTasksContext } from '../../context/tasks_context';
 
 const TasksList = ({ data, handleTask }) => {
   const [filter, setFilter] = useState('All');
@@ -17,29 +18,32 @@ const TasksList = ({ data, handleTask }) => {
     setFilter(button);
   };
 
-  if (!data.length) {
-    return <EmptyTask />;
-  }
+  const { tasks } = useTasksContext();
+  console.log(tasks);
+
+  // if (!data.length) {
+  //   return <EmptyTask />;
+  // }
 
   return (
     <ContainerTasksListStyles>
-      <WrapperTitleStyles>
+      {/* <WrapperTitleStyles>
         <h2>Task List</h2>
         <span>You have {data.length} tasks</span>
       </WrapperTitleStyles>
-      <ButtonFilter handleFilter={handleFilter} filter={filter} />
+      <ButtonFilter handleFilter={handleFilter} filter={filter} /> */}
       <TasksStyles>
-        {data
-          .filter((task) => {
-            const filterSelect = selectFilter(task);
-            return filterSelect[filter];
-          })
+        {tasks
+          // .filter((task) => {
+          //   const filterSelect = selectFilter(task);
+          //   return filterSelect[filter];
+          // })
           .map((task, index) => (
             <Task
               key={task.id}
               task={task}
               index={index}
-              handleTask={handleTask}
+              // handleTask={handleTask}
             />
           ))}
       </TasksStyles>
@@ -48,8 +52,3 @@ const TasksList = ({ data, handleTask }) => {
 };
 
 export default TasksList;
-
-TasksList.propTypes = {
-  data: PropTypes.array,
-  handleChecked: PropTypes.func,
-};

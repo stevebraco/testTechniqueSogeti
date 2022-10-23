@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { addTask, deleteTask, filterDataCompleted } from '../lib/helpers';
 
 export default function useForm(tasks, setTasks) {
@@ -8,6 +8,10 @@ export default function useForm(tasks, setTasks) {
     title: '',
     description: '',
   });
+
+  // useEffect(() => {
+  //   localStorage.setItem('tasks', JSON.stringify(tasks));
+  // }, [tasks]);
 
   const handleChecked = (index, completed) => () => {
     setTasks((prevState) => {
@@ -43,6 +47,7 @@ export default function useForm(tasks, setTasks) {
           ...copyState[updateTask.index],
           title: title.value,
           description: description.value,
+          date: new Date().toISOString(),
         };
 
         return copyState;

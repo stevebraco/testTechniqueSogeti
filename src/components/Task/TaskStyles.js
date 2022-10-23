@@ -25,9 +25,9 @@ export const TitleStyles = styled.h2`
   font-weight: 500;
   text-decoration-line: ${({ completed }) => completed && 'line-through'};
   display: inline-block;
-  max-width: 130px;
-  @media (max-width: 500px) {
+  @media (max-width: 520px) {
     font-size: 10px;
+    max-width: 130px;
   }
 `;
 

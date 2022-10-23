@@ -1,5 +1,6 @@
 {
   "name": "test-todo",
+  "proxy": "http://127.0.0.1:5000",
   "version": "0.1.0",
   "homepage": "https://stevebraco.github.io/testTechniqueSogeti",
   "private": true,
@@ -7,7 +8,9 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.1.3",
     "date-fns": "^2.29.3",
+    "json-server": "^0.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
@@ -20,6 +23,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
+    "server": "json-server --watch src/db.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
