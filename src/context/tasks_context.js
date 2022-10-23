@@ -20,7 +20,9 @@ export const TasksProvider = ({ children }) => {
   const fetchTasks = async () => {
     dispatch({ type: 'GET_TASKS_BEGIN' });
     try {
-      const { data } = await axios.get('http://localhost:3000/tasks');
+      const { data } = await axios.get(
+        'https://stevebraco.github.io/testTechniqueSogeti//tasks'
+      );
       dispatch({ type: 'GET_TASKS_SUCCESS', payload: data });
     } catch (error) {
       dispatch({ type: 'GET_TASKS_ERROR' });
@@ -32,7 +34,9 @@ export const TasksProvider = ({ children }) => {
     dispatch({ type: 'TASK_DELETE_SUCCESS' });
 
     try {
-      const { data } = await axios.delete(`http://localhost:3000/tasks/${id}`);
+      const { data } = await axios.delete(
+        `https://stevebraco.github.io/testTechniqueSogeti//tasks/${id}`
+      );
       dispatch({ type: 'TASK_DELETE_SUCCESS', payload: data });
       dispatch({ type: 'TASK_DELETE_RESET' });
     } catch (error) {
@@ -50,7 +54,7 @@ export const TasksProvider = ({ children }) => {
       task.completed = !task.completed;
 
       const { data } = await axios.put(
-        `http://localhost:3000/tasks/${task.id}`,
+        `https://stevebraco.github.io/testTechniqueSogeti//tasks/${task.id}`,
         task
       );
       dispatch({ type: 'TASK_UPDATE_SUCCESS', payload: data });
@@ -75,7 +79,7 @@ export const TasksProvider = ({ children }) => {
 
       try {
         const { data } = await axios.put(
-          `http://localhost:3000/tasks/${editTask.id}`,
+          `https://stevebraco.github.io/testTechniqueSogeti//tasks/${editTask.id}`,
           editNewTask
         );
         dispatch({ type: 'TASK_UPDATE_SUCCESS', payload: data });
@@ -95,7 +99,7 @@ export const TasksProvider = ({ children }) => {
       // dispatch({ type: 'TASK_CREATE_REQUEST' });
       try {
         const { data } = await axios.post(
-          `http://localhost:3000/tasks`,
+          `https://stevebraco.github.io/testTechniqueSogeti//tasks`,
           newTask
         );
         dispatch({ type: 'TASK_CREATE_SUCCESS', payload: data });
@@ -110,7 +114,9 @@ export const TasksProvider = ({ children }) => {
 
   const fetchTask = async (id) => {
     try {
-      const { data } = await axios.get(`http://localhost:3000/tasks/${id}`);
+      const { data } = await axios.get(
+        `https://stevebraco.github.io/testTechniqueSogeti//tasks/${id}`
+      );
       dispatch({ type: 'FETCH_TASK_SUCCESS', payload: data });
     } catch (error) {
       console.log(error);
