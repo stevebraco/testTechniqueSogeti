@@ -6,7 +6,6 @@ import DetailsTaskPage from './pages/DetailsTaskPage';
 
 import data from './data';
 import './App.css';
-import Test from './components/Test';
 
 function App() {
   const [tasks, setTasks] = useState(
@@ -27,7 +26,6 @@ function App() {
           element={<DetailsTaskPage data={tasks} />}
         /> */}
         <Route path="/testTechniqueSogeti/:id" element={<DetailsTaskPage />} />
-        <Route path="/testTechniqueSogeti/test" element={<Test />} />
       </Routes>
     </BrowserRouter>
   );
