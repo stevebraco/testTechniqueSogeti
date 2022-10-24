@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import NewTask from '../components/NewTask/NewTask';
 import TasksList from '../components/TasksList/TasksList';
-import useForm from '../hook/useForm';
 
 const Container = styled.div`
   display: flex;

@@ -14,7 +14,9 @@ export const ContainerTasksListStyles = styled.div`
 export const WrapperTitleStyles = styled.div`
   display: flex;
   align-items: baseline;
+  justify-content: space-between;
   gap: 25px;
+  position: relative;
 
   span {
     color: gray;

@@ -11,16 +11,15 @@ import { BsFillPencilFill } from 'react-icons/bs';
 import Date from '../Date/Date';
 import { useTasksContext } from '../../context/tasks_context';
 
-const Task = ({ task, index }) => {
-  // const { handleChecked, handleDelete, handleUpdate } = handleTask();
-  const { id, title, completed, date } = task;
+const Task = ({ task }) => {
+  const { _id, title, completed, date } = task;
 
-  const { handleDelete, success, reset, handleChecked, handleUpdate } =
+  const { handleDelete, success, successTask, handleChecked, handleUpdate } =
     useTasksContext();
 
   useEffect(() => {
     if (success) {
-      reset();
+      successTask();
     }
   }, [success]);
 
@@ -33,7 +32,7 @@ const Task = ({ task, index }) => {
           defaultChecked={completed}
           onClick={handleChecked(task)}
         />
-        <Link to={`/testTechniqueSogeti/${id}`}>
+        <Link to={`/testTechniqueSogeti/${_id}`}>
           <TitleStyles data-testid="task" completed={completed}>
             {title}
           </TitleStyles>
@@ -41,7 +40,7 @@ const Task = ({ task, index }) => {
         <Date date={date} />
       </div>
       <div>
-        <ButtonDeleteStyles onClick={handleDelete(id)}>X</ButtonDeleteStyles>
+        <ButtonDeleteStyles onClick={handleDelete(_id)}>X</ButtonDeleteStyles>
         <ButtonUpdateStyles data-testid="update" onClick={handleUpdate(task)}>
           <BsFillPencilFill />
         </ButtonUpdateStyles>

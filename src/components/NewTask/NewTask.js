@@ -13,15 +13,19 @@ import {
 } from './NewTaskStyles';
 
 const NewTask = () => {
-  const { editTask, handleSubmit, success, reset, isEdit } = useTasksContext();
+  const { editTask, handleSubmit, success, successTask, message } =
+    useTasksContext();
+
   const isDefaultValue = (value) => (editTask.title ? value : '');
+
   const { title, description } = editTask;
 
   useEffect(() => {
     if (success) {
-      reset();
+      successTask();
     }
   }, [success]);
+
   return (
     <ContainerNewTaskStyles>
       {!editTask.title ? <h1>Add a new task</h1> : <h1>Update a task</h1>}
@@ -35,7 +39,7 @@ const NewTask = () => {
             data-testid="title"
             defaultValue={isDefaultValue(title)}
           />
-          {/* {error && <MessageError />} */}
+          {message && <MessageError message={message} />}
         </GroupFormStyles>
         <GroupFormStyles>
           <LabelStyles htmlFor="description">Description</LabelStyles>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import reducer from '../reducers/tasks_reducer';
 
 const initialState = {
@@ -9,38 +9,36 @@ const initialState = {
   tasks: [],
   task: null,
   editTask: {},
-  isEdit: false,
+  message: '',
 };
 
-const TasksContext = React.createContext();
+const url = 'https://todoappbackone.herokuapp.com/api/tasks';
+
+const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const fetchTasks = async () => {
-    dispatch({ type: 'GET_TASKS_BEGIN' });
+    dispatch({ type: 'TASKS_LOADING' });
     try {
-      const { data } = await axios.get(
-        'https://stevebraco.github.io/testTechniqueSogeti//tasks'
-      );
-      dispatch({ type: 'GET_TASKS_SUCCESS', payload: data });
+      const { data } = await axios.get(url);
+      dispatch({ type: 'FETCH_TASKS_SUCCESS', payload: data });
     } catch (error) {
-      dispatch({ type: 'GET_TASKS_ERROR' });
+      dispatch({ type: 'TASKS_ERROR' });
     }
   };
 
   const handleDelete = (id) => async () => {
-    console.log('delete');
-    dispatch({ type: 'TASK_DELETE_SUCCESS' });
+    dispatch({ type: 'TASKS_LOADING' });
 
     try {
       const { data } = await axios.delete(
-        `https://stevebraco.github.io/testTechniqueSogeti//tasks/${id}`
+        `https://todoappbackone.herokuapp.com/api/tasks/${id}`
       );
-      dispatch({ type: 'TASK_DELETE_SUCCESS', payload: data });
-      dispatch({ type: 'TASK_DELETE_RESET' });
+      dispatch({ type: 'DELETE_TASK_SUCCESS', payload: data });
     } catch (error) {
-      dispatch({ type: 'TASK_DELETE_FAIL', payload: error.message });
+      dispatch({ type: 'TASKS_ERROR', payload: error.message });
     }
   };
 
@@ -49,77 +47,78 @@ export const TasksProvider = ({ children }) => {
   };
 
   const handleChecked = (task) => async () => {
-    dispatch({ type: 'TASK_UPDATE_REQUEST' });
+    const { _id } = task;
+    dispatch({ type: 'TASKS_LOADING' });
     try {
       task.completed = !task.completed;
 
-      const { data } = await axios.put(
-        `https://stevebraco.github.io/testTechniqueSogeti//tasks/${task.id}`,
-        task
-      );
-      dispatch({ type: 'TASK_UPDATE_SUCCESS', payload: data });
+      const { data } = await axios.put(`${url}/${_id}`, task);
+
+      dispatch({ type: 'CHECKED_TASK_SUCCESS', payload: data });
     } catch (error) {
-      dispatch({ type: 'TASK_UPDATE_FAIL', payload: error.message });
+      dispatch({ type: 'TASKS_ERROR', payload: error.message });
     }
   };
 
-  const resetForm = (name) => {
-    name.value = '';
-  };
-
   const handleSubmit = (editTask) => async (e) => {
+    const { _id } = editTask;
+
     e.preventDefault();
     const [title, description] = e.target;
+
+    // title is empty
+    if (!title.value) {
+      dispatch({ type: 'MESSAGE_TASKS_ERROR', payload: 'Title is required' });
+      return;
+    }
+
+    // edit Task
     if (editTask.title) {
       const editNewTask = {
         ...editTask,
         title: title.value,
         description: description.value,
+        date: new Date().toISOString(),
       };
 
+      dispatch({ type: 'TASKS_LOADING' });
+
       try {
-        const { data } = await axios.put(
-          `https://stevebraco.github.io/testTechniqueSogeti//tasks/${editTask.id}`,
-          editNewTask
-        );
-        dispatch({ type: 'TASK_UPDATE_SUCCESS', payload: data });
+        const { data } = await axios.put(`${url}/${_id}`, editNewTask);
+        dispatch({ type: 'UPDATE_TASK_SUCCESS', payload: data });
       } catch (error) {
-        console.log(error);
+        dispatch({ type: 'TASKS_ERROR', payload: error });
       }
     } else {
-      console.log('add');
+      // Add new task
       const newTask = {
-        id: Date.now(),
         title: title.value,
         description: description.value,
         completed: false,
         date: new Date().toISOString(),
       };
 
-      // dispatch({ type: 'TASK_CREATE_REQUEST' });
+      dispatch({ type: 'TASKS_LOADING' });
       try {
-        const { data } = await axios.post(
-          `https://stevebraco.github.io/testTechniqueSogeti//tasks`,
-          newTask
-        );
-        dispatch({ type: 'TASK_CREATE_SUCCESS', payload: data });
-        console.log(data);
+        const { data } = await axios.post(url, newTask);
+        dispatch({ type: 'CREATE_TASK_SUCCESS', payload: data });
       } catch (error) {
-        // dispatch({ type: 'TASK_CREATE_REQUEST', action: error });
+        dispatch({ type: 'TASKS_ERROR', action: error });
       }
     }
+    dispatch({ type: 'MESSAGE_TASKS_EMPTY' });
 
     e.target.reset();
   };
 
   const fetchTask = async (id) => {
+    dispatch({ type: 'TASKS_LOADING' });
+
     try {
-      const { data } = await axios.get(
-        `https://stevebraco.github.io/testTechniqueSogeti//tasks/${id}`
-      );
+      const { data } = await axios.get(`${url}/${id}`);
       dispatch({ type: 'FETCH_TASK_SUCCESS', payload: data });
     } catch (error) {
-      console.log(error);
+      dispatch({ type: 'TASKS_ERROR', action: error });
     }
   };
 
@@ -127,13 +126,7 @@ export const TasksProvider = ({ children }) => {
     fetchTasks();
   }, []);
 
-  // useEffect(() => {
-  //   if (initialState.updateTask) {
-  //     dispatch({ type: 'UPDATE_TASK' });
-  //   }
-  // }, [initialState.updateTask]);
-
-  const reset = () => {
+  const successTask = () => {
     dispatch({ type: 'TASK_SUCCESS' });
     fetchTasks();
   };
@@ -146,7 +139,7 @@ export const TasksProvider = ({ children }) => {
         handleDelete,
         handleChecked,
         handleUpdate,
-        reset,
+        successTask,
         fetchTask,
       }}
     >
@@ -154,7 +147,7 @@ export const TasksProvider = ({ children }) => {
     </TasksContext.Provider>
   );
 };
-// make sure use
+
 export const useTasksContext = () => {
   return useContext(TasksContext);
 };

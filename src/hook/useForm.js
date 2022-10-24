@@ -9,10 +9,6 @@ export default function useForm(tasks, setTasks) {
     description: '',
   });
 
-  // useEffect(() => {
-  //   localStorage.setItem('tasks', JSON.stringify(tasks));
-  // }, [tasks]);
-
   const handleChecked = (index, completed) => () => {
     setTasks((prevState) => {
       const copyState = [...prevState];
@@ -76,7 +72,6 @@ export default function useForm(tasks, setTasks) {
   };
 
   const checkIsCompleted = () => {
-    // const dataFilterCompleted = filterDataCompleted(tasks);
     setTasks(filterDataCompleted(tasks));
   };
 

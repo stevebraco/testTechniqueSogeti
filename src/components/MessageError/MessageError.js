@@ -1,8 +1,8 @@
 import React from 'react';
 import MessageErrorStyles from './MessageErrorStyles';
 
-const MessageError = () => {
-  return <MessageErrorStyles>Title is required</MessageErrorStyles>;
+const MessageError = ({ message }) => {
+  return <MessageErrorStyles>{message}</MessageErrorStyles>;
 };
 
 export default MessageError;

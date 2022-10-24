@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import Task from '../Task/Task';
 import EmptyTask from '../EmptyTask/EmptyTask';
-import ButtonFilter from '../ButtonFilter/ButtonFilter';
-import { selectFilter } from '../../lib/helpers';
 
 import {
   ContainerTasksListStyles,
@@ -11,41 +9,26 @@ import {
   WrapperTitleStyles,
 } from './TasksListStyles';
 import { useTasksContext } from '../../context/tasks_context';
+import Loading from '../Loading/Loading';
 
-const TasksList = ({ data, handleTask }) => {
-  const [filter, setFilter] = useState('All');
-  const handleFilter = (button) => () => {
-    setFilter(button);
-  };
-
-  const { tasks } = useTasksContext();
-  console.log(tasks);
-
-  // if (!data.length) {
-  //   return <EmptyTask />;
-  // }
+const TasksList = () => {
+  const { tasks, loading } = useTasksContext();
 
   return (
     <ContainerTasksListStyles>
-      {/* <WrapperTitleStyles>
-        <h2>Task List</h2>
-        <span>You have {data.length} tasks</span>
+      <WrapperTitleStyles>
+        <div>
+          <h2>Task List</h2>
+          <span>You have {tasks.length} tasks</span>
+        </div>
+        {loading && <Loading />}
       </WrapperTitleStyles>
-      <ButtonFilter handleFilter={handleFilter} filter={filter} /> */}
       <TasksStyles>
-        {tasks
-          // .filter((task) => {
-          //   const filterSelect = selectFilter(task);
-          //   return filterSelect[filter];
-          // })
-          .map((task, index) => (
-            <Task
-              key={task.id}
-              task={task}
-              index={index}
-              // handleTask={handleTask}
-            />
-          ))}
+        {!tasks.length ? (
+          <EmptyTask />
+        ) : (
+          tasks.map((task) => <Task key={task._id} task={task} />)
+        )}
       </TasksStyles>
     </ContainerTasksListStyles>
   );
