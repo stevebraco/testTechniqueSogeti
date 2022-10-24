@@ -42,7 +42,7 @@ const tasks_reducer = (state, action) => {
 
   // fetch one task
   if (action.type === 'FETCH_TASK_SUCCESS') {
-    return { ...state, task: action.payload };
+    return { ...state, task: action.payload, loading: false };
   }
 
   if (action.type === 'MESSAGE_TASKS_ERROR') {
