@@ -1,4 +1,5 @@
-import React fron 'react';
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable no-undef */
 import { render, screen, fireEvent } from '@testing-library/react';
 import { addTask, deleteTask, filterDataCompleted } from '../lib/helpers';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
