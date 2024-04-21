@@ -12,7 +12,7 @@ const initialState = {
   message: '',
 };
 
-const url = 'https://todoappbackone.herokuapp.com/api/tasks';
+const url = 'https://sogebacktodoapp.onrender.com/api/tasks';
 
 const TasksContext = createContext();
 
